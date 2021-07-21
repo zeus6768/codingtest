@@ -1,28 +1,39 @@
 # 나의 풀이
-from os import remove
+import math
 
-
-def solution(progresses, speeds):
-    from collections import deque
+def solution1(progresses, speeds):
     answer = []
-    days_left = []
-    cnt = 0
-    for p, s in zip(progresses, speeds):
-        days_left.append((100 - p) / s)
-        # [7, 2.333, 9]
-    for n in days_left:
-        tmp = []
-        for i in range(len(days_left)):
-            if n >= days_left[i]:
-                tmp.append(days_left[i])
-        days_left.remove(days_left[i])
-        answer.append(len(tmp))
+    stack = []
+
+    for i in range(len(progresses)):
+        days_left = math.ceil((100 - progresses[i]) / speeds[i])
+
+        if i == 0:
+            stack.append(days_left)
+        else:
+            if stack[0] >= days_left:
+                stack.append(days_left)
+            else:
+                answer.append(len(stack))
+                stack.clear()
+                stack.append(days_left)
+
+    answer.append(len(stack))
 
     return answer
 
-print(solution([93, 30, 55], [1, 30, 5]))
 
 # 다른 사람의 풀이
+def solution2(progresses, speeds):
+    Q=[]
+    for p, s in zip(progresses, speeds):
+        if len(Q)==0 or Q[-1][0]<-((p-100)//s):
+            Q.append([-((p-100)//s),1])
+        else:
+            Q[-1][1]+=1
+    return [q[1] for q in Q]
 
-#[93, 30, 55]	[1, 30, 5]	[2, 1]
-#[95, 90, 99, 99, 80, 99]	[1, 1, 1, 1, 1, 1]	[1, 3, 2]
+
+# 입력
+print(solution1([93, 30, 55], [1, 30, 5]))
+print(solution2([95, 90, 99, 99, 80, 99], [1, 1, 1, 1, 1, 1]))
