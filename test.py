@@ -1,8 +1,9 @@
-import time
-a = list(range(100000))
+list1 = []
+for i in range(5):
+	list1.append([])
+	for j in range(5):
+		list1[i].append(0)
 
-start = time.time()
-a.reverse()
-#a[::-1]
-end = time.time()
-print(end - start)
+
+
+print(list1)
