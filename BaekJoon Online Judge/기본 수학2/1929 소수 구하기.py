@@ -6,5 +6,5 @@ def solution(m, n):
 		if is_prime[i] == True:
 			for j in range(i+i, n+1, i):
 				is_prime[j] = False
-	[print(i) for i in range(m, n+1) if is_prime[i] == True]
+	[print(i) for i in range(m, n+1) if is_prime[i] == True and i != 1]
 solution(m, n)
