@@ -8,12 +8,10 @@ def main():
     while len(x) > 1:
         x = str(sum(map(int, x)))
         cal += 1
-        print(x, cal)
 
     print(cal)
-    if int(x) % 3:
-        print("NO")
-    else:
-        print("YES")
+    print("NO") if int(x) % 3 else print("YES")
 
 main()
+
+# correct
