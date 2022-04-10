@@ -1,4 +1,3 @@
-
 def main():
     r, c = map(int, input().split())
     pic = [[*map(int, input().split())] for _ in range(r)]

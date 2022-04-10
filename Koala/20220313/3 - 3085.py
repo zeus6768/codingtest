@@ -50,3 +50,5 @@ def count(n, candies):
     return result
 
 main()
+
+# correct

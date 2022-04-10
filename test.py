@@ -1,6 +1,7 @@
-input = __import__('sys').stdin.readline
-input()
-A = set(input().split())
-input()
-M = input().split()
-print("\n".join(['1' if i in A else '0' for i in M]))
+import collections
+
+a = collections.deque([1, 2, 3])
+c = [1, 2, 3]
+print(a)
+print(a[1])
+print(c[1:])
