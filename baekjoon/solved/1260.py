@@ -2,41 +2,38 @@ from collections import deque
 from sys import stdin
 input = stdin.readline
 
-def main():
+def solution():
 	n, m, v = map(int, input().split())
-	nodes = [[]]
-	[nodes.append([]) for _ in range(n)]
+	graph = [[] for _ in range(n+1)]
 	for _ in range(m):
-		s, d = map(int, input().split())
-		nodes[s].append(d)
-		nodes[d].append(s)
-	nodes = [sorted(nodes[i]) for i in range(n+1)]
-	d_visited = [False] * (n+1)
-	b_visited = [False] * (n+1)
-	
-	d_route = []
-	b_route = []
+		a, b = map(int, input().split())
+		graph[a].append(b)
+		graph[b].append(a)
+	graph = [*map(sorted, graph)]
+	visited_d, visited_b = [False] * (n+1), [False] * (n+1)
 
+	result = []
 	def dfs(now):
-		d_route.append(now)
-		d_visited[now] = True
-		[dfs(i) for i in nodes[now] if not d_visited[i]]
-
-	def bfs(now):
-		b_visited[now] = True
-		queue = deque([now])
-		b_route.append(now)
-		while queue:
-			v = queue.popleft()
-			for i in nodes[v]:
-				if not b_visited[i]:
-					queue.append(i)
-					b_visited[i] = True
-					b_route.append(i)
-
+		stack = [now]
+		while stack:
+			s = stack.pop()
+			if not visited_d[s]:
+				result.append(s)
+				visited_d[s] = True
+				[stack.append(i) for i in graph[s][::-1] if not visited_d[i]]
 	dfs(v)
-	print(*d_route)
+	print(*result)
+	
+	result = []
+	def bfs(now):
+		queue = deque([now])
+		while queue:
+			s = queue.popleft()
+			if not visited_b[s]:
+				result.append(s)
+				visited_b[s] = True
+				[queue.append(i) for i in graph[s] if not visited_b[i]]
 	bfs(v)
-	print(*b_route)
+	print(*result)
 
-main()
+solution()
