@@ -1,3 +1,12 @@
+# 에라토스테네스의 체
+def prime(n):
+	is_prime = [True] * (n+1)
+	for i in range(2, int(n**0.5)+1):
+		if is_prime[i]:
+			for j in range(i+i, n+1, i):
+				is_prime[j] = False
+	return [i for i in range(2, n+1) if is_prime[i]]
+
 # 최대공약수 GCD
 def gcd(x, y):
 	while y:
@@ -53,18 +62,19 @@ def bfs():
 
 # 다익스트라 Dijkstra
 from heapq import *
-n = int(input())
-adj = [[] for _ in range(n+1)]
-def dijkstra(s):
-	cost = [float('inf')] * (n+1)
-	cost[s] = 0
-	hq = [[0, s]]
-	while hq:
-		t, x = heappop(hq)
-		if cost[x] != t:
-			continue
-		for nx, nt in adj[x]:
-			if cost[nx] > t + nt:
-				cost[nx] = t + nt
-				heappush(hq, [cost[nx], nx])
-	return cost
+def dijkstra():
+	n = int(input())
+	adj = [[] for _ in range(n+1)]
+	def _dijkstra(s):
+		cost = [float('inf')] * (n+1)
+		cost[s] = 0
+		hq = [[0, s]]
+		while hq:
+			t, x = heappop(hq)
+			if cost[x] != t:
+				continue
+			for nx, nt in adj[x]:
+				if cost[nx] > t + nt:
+					cost[nx] = t + nt
+					heappush(hq, [cost[nx], nx])
+		return cost
