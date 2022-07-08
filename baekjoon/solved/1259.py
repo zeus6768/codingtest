@@ -1,7 +1,11 @@
-input = lambda: __import__('sys').stdin.readline().strip()
-def main():
+def solve():
 	while True:
 		num = input()
-		if num == '0': break
-		print('yes') if num == num[::-1] else print('no')
-main()
+		if num == '0':
+			break
+		elif num == num[::-1]:
+			print('yes')
+		else:
+			print('no')
+
+solve()

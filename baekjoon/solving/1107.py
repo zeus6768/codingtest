@@ -10,22 +10,22 @@ def solution():
 
 	nums = []
 	def get_num(number):
-		if len(number) == len(n): 
+		if len(n)-1 <= len(number): 
 			nums.append(number)
-			return
+			if len(number) == len(n) + 1:
+				return
 		[get_num(number+b) for b in buttons]
 
 	if 98 <= int(n) <= 103:
 		print(abs(100 - int(n)))
 	else:
 		get_num("")
-		channel, tmp = '100', 500000
+		diff = abs(100-int(n))
 		for num in nums:
-			diff = abs(int(num) - int(n))
-			if diff < tmp:
-				tmp = diff
-				channel = num
-		answer = len(channel) + abs(int(channel)-int(n))
-		print(answer)
+			if num:
+				tmp = abs(int(num) - int(n)) + len(num)
+				if tmp < diff:
+					diff = tmp
+		print(diff)
 
 solution()
