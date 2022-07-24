@@ -1,19 +1,20 @@
-def main():
+def solve():
 	n, m = map(int, input().split())
-	A = [*map(int, input().split())]
+	nums = [*map(int, input().split())]
 
-	left, right = 0, 1
 	answer = 0
-	while right <= n:
-		total = sum(A[left:right])
-		if total < m:
-			right += 1
-		elif total > m:
-			left += 1
-		else:
-			right += 1
-			answer += 1
+	left, right = 0, 0
 
+	while right < n:
+		_sum = sum(nums[left:right+1])
+		if _sum == m:
+			answer += 1
+			right += 1
+		elif _sum < m:
+			right += 1
+		elif _sum > m:
+			left += 1
+	
 	print(answer)
 
-main()
+solve()
