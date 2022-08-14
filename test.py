@@ -1,4 +1,8 @@
-# 함수의 작동 방식
-# return, 스택
+from heapq import *
 
-# 반복문, break, continue
+a = [4, 1, 2, 3]
+
+heapify(a)
+r = heappop(a)
+
+print(r)

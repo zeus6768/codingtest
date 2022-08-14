@@ -1,30 +1,27 @@
-import sys
-input = sys.stdin.readline
+def solve():
+	_, m = map(int, input().split())
+	bluerays = list(map(int, input().split()))
 
-def main():
-	n, m = map(int, input().split())
-	arr = [*map(int, input().split())]
-	
-	left, right = 1, 10**9
-	result = float('inf')
-	while left <= right:
-		mid = (left+right)//2
-		blueray, blueraynum = 0, 1
-		for a in arr:
-			if blueray + a <= mid:
-				blueray += a
-			elif a > mid:
-				blueraynum = float('inf')
-				break
-			else:
-				blueraynum += 1
-				blueray = a
-		if blueraynum <= m:
-			result = min(result, mid)
-			right = mid-1
+	answer = float('inf')
+	l, r = 0, 10000*m
+
+	while l <= r:
+		mid = (l+r)//2
+		record, count = mid, 1
+
+		for b in bluerays:
+			if record < b:
+				record = mid
+				count += 1
+			record -= b
+		
+		if m < count or mid < max(bluerays):
+			l = mid + 1
 		else:
-			left = mid+1
+			answer = min(answer, mid)
+			r = mid - 1
 
-	print(result)
+	print(answer)
 
-main()
+
+solve()

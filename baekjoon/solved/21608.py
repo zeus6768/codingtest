@@ -15,16 +15,17 @@ def solve():
 		_max = 0
 		for i in range(n):
 			for j in range(n):
-				tmp = 0
-				for k in range(4):
-					nr, nc = i+dxy[k][0], j+dxy[k][1]
-					if (classroom[i][j]==0) and (0<=nr<n) and (0<=nc<n) and classroom[nr][nc] in students[student]:
-						tmp += 1
-				if _max < tmp and classroom[i][j]==0:
-					seats = [(i, j)]
-					_max = tmp
-				elif _max == tmp and classroom[i][j]==0:
-					seats.append((i, j))
+				if classroom[i][j]==0:
+					tmp = 0
+					for k in range(4):
+						nr, nc = i+dxy[k][0], j+dxy[k][1]
+						if (0<=nr<n) and (0<=nc<n) and (classroom[nr][nc] in students[student]):
+							tmp += 1
+					if _max < tmp:
+						seats = [(i, j)]
+						_max = tmp
+					elif _max == tmp:
+						seats.append((i, j))
 		return seats
 
 	def condition2(seats):

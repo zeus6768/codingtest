@@ -1,4 +1,4 @@
-def primes(n):
+def primes(n): # 에라토스테네스의 체
 	if n < 2:
 		return [0]
 	is_prime = [True] * (n+1)
@@ -12,11 +12,11 @@ def solve():
 	n = int(input())
 
 	prime = primes(n)
-	csum = [0]
+	csum = [0] # 소수 누적 합
 	[csum.append(csum[i] + prime[i]) for i in range(len(prime))]
 	
 	answer = 0
-	l, r = 0, 1
+	l, r = 0, 1 # 투 포인터
 
 	while r <= len(prime):
 		num = csum[r] - csum[l]
