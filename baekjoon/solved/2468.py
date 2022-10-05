@@ -1,4 +1,5 @@
-input = __import__('sys').stdin.readline
+import sys
+input = sys.stdin.readline
 
 def solution():
 	n = int(input())
@@ -10,12 +11,12 @@ def solution():
 		d = ((-1, 0), (0, 1), (1, 0), (0, -1))
 		stack = [(r, c)]
 		while stack:
-			s = stack.pop()
-			if not visited[s[0]][s[1]] and graph[s[0]][s[1]] > v:
-				visited[s[0]][s[1]] = True
+			x, y = stack.pop()
+			if not visited[x][y] and graph[x][y] > v:
+				visited[x][y] = True
 				for i in range(4):
-					nr = s[0] + d[i][0]
-					nc = s[1] + d[i][1]
+					nr = x + d[i][0]
+					nc = y + d[i][1]
 					if (0 <= nr < n) and (0 <= nc < n) and (not visited[nr][nc]) and (graph[nr][nc] > v):
 						stack.append((nr, nc))
 
