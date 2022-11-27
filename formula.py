@@ -40,7 +40,7 @@ def dfs_recursive():
 		result.append(now)
 		for i in graph[now]:
 			if not visited[i]:
-				dfs_recursive(i)
+				dfs(i)
 	return result
 
 # BFS - 큐
@@ -61,20 +61,28 @@ def bfs():
 	return result
 
 # 다익스트라 Dijkstra
-from heapq import *
+from heapq import heappop, heappush
 def dijkstra():
-	n = int(input())
-	adj = [[] for _ in range(n+1)]
+
+	V, E = map(int, input().split())
+	K = int(input())	# 시작점
+	adjacent = [[] for _ in range(V+1)]
+	for _ in range(E):
+		u, v, w = map(int, input().split())
+		adjacent[u].append((v, w))
+
 	def _dijkstra(s):
-		cost = [float('inf')] * (n+1)
+		cost = [float('inf')] * (V+1)
 		cost[s] = 0
 		hq = [[0, s]]
 		while hq:
 			t, x = heappop(hq)
 			if cost[x] != t:
 				continue
-			for nx, nt in adj[x]:
+			for nx, nt in adjacent[x]:
 				if cost[nx] > t + nt:
 					cost[nx] = t + nt
 					heappush(hq, [cost[nx], nx])
 		return cost
+	
+
