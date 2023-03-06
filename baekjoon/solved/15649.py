@@ -1,20 +1,18 @@
-from sys import stdin
-input = stdin.readline
+def main():
 
-def solution():
-	n, m = map(int, input().split())
-
-	answer = []
-	def go():
-		if len(answer) == m:
+	def permutation(length):
+		if length == M:
 			print(*answer)
 			return
-		for i in range(1, n+1):
+		for i in range(1, N+1):
 			if i not in answer:
 				answer.append(i)
-				go()
+				permutation(length+1)
 				answer.pop()
+	
+	N, M = map(int, input().split())
 
-	go()
+	answer = []
+	permutation(0)
 
-solution()
+main()
