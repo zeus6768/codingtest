@@ -1,3 +1,13 @@
+# 모듈러 연산 거듭제곱
+def modular_exp(x, n, m):
+	y, u = 1, x % m
+	while n > 0:
+		if n % 2:
+			y = (y*u) % m
+		n //= 2
+		u = (u**2) % m
+	return y
+
 # 에라토스테네스의 체
 def prime(n):
 	is_prime = [True] * (n+1)
