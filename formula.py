@@ -29,29 +29,23 @@ def lcm(x, y):
 
 # DFS - 스택
 def dfs_stack():
-	graph, visited, result = [], [], []
+	graph, visited= [], []
 	def dfs(now):
 		stack = [now]
 		while stack:
 			v = stack.pop()
-			if not visited[v]:
-				result.append(v)
-				visited[v] = True
-				for i in graph[v]:
-					if not visited[i]:
-						stack.append(i)
-	return result
+			for i in graph[v]:
+				if not visited[i]:
+					stack.append(i)
 
 # DFS - 재귀
 def dfs_recursive():
-	graph, visited, result = [], [], []
+	graph, visited= [], []
 	def dfs(now):
 		visited[now] = True
-		result.append(now)
 		for i in graph[now]:
 			if not visited[i]:
 				dfs(i)
-	return result
 
 # BFS - 큐
 from collections import deque
