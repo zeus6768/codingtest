@@ -1,3 +1,9 @@
+# 주어진 단위로 반올림
+def customRound(number: float, unit: float):
+	if (number // unit) % 2 == 0:
+		return (number // unit) * unit
+	return (number // unit + 1) * unit
+
 # 모듈러 연산 거듭제곱
 def modular_exp(x, n, m):
 	y, u = 1, x % m
@@ -67,7 +73,6 @@ def bfs():
 # 다익스트라 Dijkstra
 from heapq import heappop, heappush
 def dijkstra():
-
 	V, E = map(int, input().split())
 	K = int(input())	# 시작점
 	adjacent = [[] for _ in range(V+1)]
@@ -75,10 +80,10 @@ def dijkstra():
 		u, v, w = map(int, input().split())
 		adjacent[u].append((v, w))
 
-	def _dijkstra(s):
+	def _dijkstra():
 		cost = [float('inf')] * (V+1)
-		cost[s] = 0
-		hq = [[0, s]]
+		cost[K] = 0
+		hq = [[0, K]]
 		while hq:
 			t, x = heappop(hq)
 			if cost[x] != t:
