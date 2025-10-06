@@ -1,1 +1,0 @@
-solve = lambda list1 : sum(list1)
